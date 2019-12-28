@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: server-example-deployment
+  name: server-example-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-example
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: server-example
+    spec:
+      containers:
+      - name: server
+        env:
+        - name: PORT
+          value: "8080"
+        image: gcr.io/project-id/repository-name:tag
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
