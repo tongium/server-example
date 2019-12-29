@@ -1,8 +1,11 @@
 steps:
+  # docker build --tag gcr.io/your-project-id/your-repository-name:your-tag .
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "--tag=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA", "."]
+  # docker push gcr.io/your-project-id/your-repository-name:your-tag  
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
+  # kubectl set image deployment/server-example-deployment=gcr.io/your-project-id/your-repository-name:your-tag
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['set', 'image', 'deployment/server-example-deployment', 'server=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
     env:
