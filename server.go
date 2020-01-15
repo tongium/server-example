@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -23,6 +24,10 @@ func main() {
 
 	// Routes
 	e.GET("/", func(c echo.Context) error {
+		fmt.Println(`{"severity":"panic","timestamp":"2020-01-16T13:45:41.329Z","user_id":"1","uri":"/post/admin/cross-overrule-data","method":"POST","ip":"::1","message":{"portDate":"2021-01-08"}}`)
+		fmt.Println(`{"severity":"info","timestamp":"2020-01-16T13:45:41.329Z","user_id":"2","uri":"/post/admin/cross-overrule-data","method":"POST","ip":"::1","message":{"portDate":"2021-01-08"}}`)
+		fmt.Println(`{"severity":"debug","timestamp":"2020-01-16T13:45:41.329Z","user_id":"3","uri":"/post/admin/cross-overrule-data","method":"POST","ip":"::1","message":{"portDate":"2021-01-08"}}`)
+		fmt.Println(`{"severity":"warn","timestamp":"2020-01-16T13:45:41.329Z","user_id":"4","uri":"/post/admin/cross-overrule-data","method":"POST","ip":"::1","message":{"portDate":"2021-01-08"}}`)
 		return c.String(http.StatusOK, "Hello world")
 	})
 
